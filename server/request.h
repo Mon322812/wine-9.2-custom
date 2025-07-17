@@ -348,6 +348,8 @@ DECL_HANDLER(set_token_default_dacl);
 DECL_HANDLER(set_security_object);
 DECL_HANDLER(get_security_object);
 DECL_HANDLER(get_system_handles);
+DECL_HANDLER(get_tcp_connections);
+DECL_HANDLER(get_udp_endpoints);
 DECL_HANDLER(create_mailslot);
 DECL_HANDLER(set_mailslot_info);
 DECL_HANDLER(create_directory);
@@ -643,6 +645,8 @@ static const req_handler req_handlers[REQ_NB_REQUESTS] =
     (req_handler)req_set_security_object,
     (req_handler)req_get_security_object,
     (req_handler)req_get_system_handles,
+    (req_handler)req_get_tcp_connections,
+    (req_handler)req_get_udp_endpoints,
     (req_handler)req_create_mailslot,
     (req_handler)req_set_mailslot_info,
     (req_handler)req_create_directory,
@@ -2080,6 +2084,13 @@ C_ASSERT( sizeof(struct get_security_object_reply) == 16 );
 C_ASSERT( sizeof(struct get_system_handles_request) == 16 );
 C_ASSERT( FIELD_OFFSET(struct get_system_handles_reply, count) == 8 );
 C_ASSERT( sizeof(struct get_system_handles_reply) == 16 );
+C_ASSERT( FIELD_OFFSET(struct get_tcp_connections_request, state_filter) == 12 );
+C_ASSERT( sizeof(struct get_tcp_connections_request) == 16 );
+C_ASSERT( FIELD_OFFSET(struct get_tcp_connections_reply, count) == 8 );
+C_ASSERT( sizeof(struct get_tcp_connections_reply) == 16 );
+C_ASSERT( sizeof(struct get_udp_endpoints_request) == 16 );
+C_ASSERT( FIELD_OFFSET(struct get_udp_endpoints_reply, count) == 8 );
+C_ASSERT( sizeof(struct get_udp_endpoints_reply) == 16 );
 C_ASSERT( FIELD_OFFSET(struct create_mailslot_request, access) == 12 );
 C_ASSERT( FIELD_OFFSET(struct create_mailslot_request, read_timeout) == 16 );
 C_ASSERT( FIELD_OFFSET(struct create_mailslot_request, max_msgsize) == 24 );
